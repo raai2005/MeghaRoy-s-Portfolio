@@ -57,7 +57,7 @@ const fallbackAnimation = {
 interface AboutData {
   title?: string;
   description?: string;
-  image: string; // Required field
+  image?: string; // Optional field
 }
 
 interface AboutProps {
@@ -99,6 +99,8 @@ export default function About({ data }: AboutProps) {
     title: 'About',
     image: '/placeholder-about.jpg', // Default image as a fallback
   };
+
+  const imageUrl = aboutData.image || '/placeholder-about.jpg';
 
   return (
     <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
@@ -345,7 +347,7 @@ export default function About({ data }: AboutProps) {
 
               {/* Show profile image */}
               <Image
-                src={aboutData.image}
+                src={imageUrl}
                 alt="About Megha"
                 width={500}
                 height={500}
