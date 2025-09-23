@@ -57,7 +57,7 @@ const fallbackAnimation = {
 interface AboutData {
   title?: string;
   description?: string;
-  image?: string;
+  image: string; // Required field
 }
 
 interface AboutProps {
@@ -96,6 +96,8 @@ export default function About({ data }: AboutProps) {
 
   const aboutData = data || {
     description: 'I am a passionate full stack developer with experience in modern web technologies. I love creating efficient, scalable, and user-friendly applications that solve real-world problems.',
+    title: 'About',
+    image: '/placeholder-about.jpg', // Default image as a fallback
   };
 
   return (
@@ -341,20 +343,18 @@ export default function About({ data }: AboutProps) {
                 />
               </div>
 
-              {/* Show image if available */}
-              {aboutData.image && (
-                <Image
-                  src={aboutData.image}
-                  alt="About Megha"
-                  width={500}
-                  height={500}
-                  className="absolute inset-0 w-full h-full object-cover opacity-0"
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMDAgMTUwQzIyNy42MTQgMTUwIDI1MCAyNy4zODU4IDI1MCAyMDBDMjUwIDE3Mi42MTQgMjI3LjYxNCAxNTAgMjAwIDE1MEMxNzIuMzg2IDE1MCA1MCAxNzIuMzg2IDE1MCAyMDBDMTUwIDIyNy42MTQgMTcyLjM4NiAxNTAgMjAwIDE1MFoiIGZpbGw9IiM5Q0EzQUYiLz4KPHN2Zz4K';
-                  }}
-                />
-              )}
+              {/* Show profile image */}
+              <Image
+                src={aboutData.image}
+                alt="About Megha"
+                width={500}
+                height={500}
+                className="absolute inset-0 w-full h-full object-cover opacity-0"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yMDAgMTUwQzIyNy42MTQgMTUwIDI1MCAyNy4zODU4IDI1MCAyMDBDMjUwIDE3Mi42MTQgMjI3LjYxNCAxNTAgMjAwIDE1MEMxNzIuMzg2IDE1MCA1MCAxNzIuMzg2IDE1MCAyMDBDMTUwIDIyNy42MTQgMTcyLjM4NiAxNTAgMjAwIDE1MFoiIGZpbGw9IiM5Q0EzQUYiLz4KPHN2Zz4K';
+                }}
+              />
             </div>
           </motion.div>
         </div>

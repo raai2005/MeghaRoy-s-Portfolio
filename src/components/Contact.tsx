@@ -137,7 +137,7 @@ export default function Contact({ data }: ContactProps) {
                   ),
                   bgColor: "bg-gray-100 dark:bg-gray-700",
                   title: "GitHub",
-                  value: "View my repositories",
+                  value: contactData.github ? contactData.github.replace('https://github.com/', '') : "View my repositories",
                   href: contactData.github,
                   textColor: "text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
                 }
