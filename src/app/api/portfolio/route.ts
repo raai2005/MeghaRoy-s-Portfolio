@@ -4,7 +4,8 @@ import clientPromise from '@/lib/mongodb'
 export async function GET() {
   try {
     const client = await clientPromise
-    const db = client.db('MyPortfolioDB') // Use the database name from .env
+    const dbName = process.env.MONGODB_DB_NAME || 'MyPortfolioDB'
+    const db = client.db(dbName)
     const portfolio = await db.collection('portfolio').findOne({ active: true })
 
     console.log('Portfolio data from database:', portfolio)
@@ -30,6 +31,9 @@ export async function GET() {
           { name: 'Next.js', level: 85 }
         ],
         projects: [],
+        certificates: [],
+        experience: [],
+        hackathons: [],
         contact: {
           email: 'contact@megha.dev',
           phone: '+1 (555) 123-4567',
@@ -54,19 +58,24 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
   try {
     const data = await request.json()
+    // Prevent attempting to update immutable _id field
+    // and sanitize incoming payload
+    const { _id, ...rest } = data || {}
+    const payload = {
+      ...rest,
+      active: true,
+      updatedAt: new Date()
+    }
     const client = await clientPromise
-    const db = client.db('MyPortfolioDB') // Use the database name from .env
+    const dbName = process.env.MONGODB_DB_NAME || 'MyPortfolioDB'
+    const db = client.db(dbName)
     
-    console.log('Saving portfolio data:', data)
+    console.log('Saving portfolio data (sanitized):', payload)
     
     const result = await db.collection('portfolio').updateOne(
       { active: true },
       { 
-        $set: { 
-          ...data, 
-          active: true,
-          updatedAt: new Date() 
-        } 
+        $set: payload 
       },
       { upsert: true }
     )
@@ -75,9 +84,7 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ success: true, result })
   } catch (error) {
     console.error('Error updating portfolio:', error)
-    return NextResponse.json(
-      { error: 'Failed to update portfolio data' },
-      { status: 500 }
-    )
+    const message = error instanceof Error ? error.message : 'Failed to update portfolio data'
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }

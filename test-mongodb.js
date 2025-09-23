@@ -1,7 +1,20 @@
 const { MongoClient } = require('mongodb');
+// Load env from .env.local or .env when running this script directly
+try {
+  const fs = require('fs');
+  const dotenv = require('dotenv');
+  const envPath = fs.existsSync('.env.local') ? '.env.local' : (fs.existsSync('.env') ? '.env' : undefined);
+  if (envPath) dotenv.config({ path: envPath });
+} catch (_) {
+  // dotenv is optional; if missing we'll rely on process env
+}
 
 async function testConnection() {
-  const uri = process.env.MONGODB_URI || "mongodb+srv://megha_portfolio:9NUmEH64CYjqzwaX@cluster0.7h9sy40.mongodb.net/MyPortfolioDB?retryWrites=true&w=majority&appName=Cluster0";
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    console.error('Missing MONGODB_URI. Please set it in your .env.local. See .env.example for details.');
+    process.exit(1);
+  }
   
   const client = new MongoClient(uri);
   
@@ -11,7 +24,8 @@ async function testConnection() {
     console.log('✅ Successfully connected to MongoDB Atlas!');
     
     // Test database operations
-    const db = client.db('MyPortfolioDB');
+  const dbName = process.env.MONGODB_DB_NAME || 'MyPortfolioDB';
+  const db = client.db(dbName);
     const collection = db.collection('portfolio');
     
     // Check if portfolio document exists

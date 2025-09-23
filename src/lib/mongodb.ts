@@ -1,6 +1,9 @@
 import { MongoClient } from 'mongodb'
 
-const uri = process.env.MONGODB_URI!
+const uri = process.env.MONGODB_URI
+if (!uri) {
+  throw new Error('Missing MONGODB_URI. Please set it in your .env.local file. See .env.example for details.')
+}
 const options = {}
 
 let client: MongoClient

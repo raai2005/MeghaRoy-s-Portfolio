@@ -18,6 +18,40 @@
 				"focus": false,
 				"panel": "new"
 			}
+		},
+		{
+			"label": "Test MongoDB Connection",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"test-mongodb.js"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Test MongoDB Connection",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"-e",
+				"require('dotenv').config({path:'.env'});require('./test-mongodb.js')"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
+		},
+		{
+			"label": "Test MongoDB Connection",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"test-mongodb.js"
+			],
+			"isBackground": false,
+			"problemMatcher": [],
+			"group": "build"
 		}
 	]
 }

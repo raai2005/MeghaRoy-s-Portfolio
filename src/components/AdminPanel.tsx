@@ -96,6 +96,7 @@ export default function AdminPanel({}: AdminPanelProps) {
     { id: 'projects', name: 'Projects', icon: '🚀', color: 'bg-orange-500' },
     { id: 'certificates', name: 'Certificates', icon: '🏆', color: 'bg-yellow-500' },
     { id: 'experience', name: 'Experience', icon: '💼', color: 'bg-indigo-500' },
+    { id: 'hackathons', name: 'Hackathons', icon: '🎯', color: 'bg-pink-500' },
     { id: 'contact', name: 'Contact', icon: '📞', color: 'bg-red-500' }
   ]
 
@@ -485,6 +486,132 @@ export default function AdminPanel({}: AdminPanelProps) {
                             onChange={(e) => handleArrayChange('certificates', index, 'url', e.target.value)}
                             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-500 focus:border-yellow-500 text-gray-900"
                             placeholder="Link to certificate"
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Hackathons Section */}
+            {activeSection === 'hackathons' && (
+              <div className="space-y-6">
+                <div className="bg-white rounded-lg p-6 shadow-md border border-pink-200">
+                  <div className="flex justify-between items-center mb-6">
+                    <h2 className="text-2xl font-bold text-pink-800 flex items-center">
+                      <span className="mr-2">🎯</span>
+                      Hackathon Experience
+                    </h2>
+                    <button
+                      onClick={() => addNewItem('hackathons', {
+                        event: '',
+                        role: '',
+                        project: '',
+                        startDate: '',
+                        endDate: '',
+                        location: '',
+                        award: '',
+                        description: ''
+                      })}
+                      className="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors flex items-center space-x-2"
+                    >
+                      <span>+</span>
+                      <span>Add Hackathon</span>
+                    </button>
+                  </div>
+                  <div className="space-y-6">
+                    {(portfolioData?.hackathons || []).map((hk: any, index: number) => (
+                      <div key={index} className="p-6 bg-pink-50 rounded-lg border border-pink-200">
+                        <div className="flex justify-between items-start mb-4">
+                          <h3 className="text-lg font-semibold text-pink-800">Hackathon {index + 1}</h3>
+                          <button
+                            onClick={() => removeItem('hackathons', index)}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            🗑️
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">Event</label>
+                            <input
+                              type="text"
+                              value={hk.event}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'event', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                              placeholder="Hackathon / Event name"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">Role</label>
+                            <input
+                              type="text"
+                              value={hk.role}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'role', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                              placeholder="Participant / Team Lead / Mentor"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">Project</label>
+                            <input
+                              type="text"
+                              value={hk.project}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'project', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                              placeholder="Project name (optional)"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">Award</label>
+                            <input
+                              type="text"
+                              value={hk.award}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'award', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                              placeholder="e.g., 1st Place, Finalist (optional)"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">Start Date</label>
+                            <input
+                              type="date"
+                              value={hk.startDate}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'startDate', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">End Date</label>
+                            <input
+                              type="date"
+                              value={hk.endDate}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'endDate', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                              placeholder="Same as start if single-day"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-pink-800 mb-2">Location</label>
+                            <input
+                              type="text"
+                              value={hk.location}
+                              onChange={(e) => handleArrayChange('hackathons', index, 'location', e.target.value)}
+                              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                              placeholder="City, Country or Remote"
+                            />
+                          </div>
+                        </div>
+                        <div className="mt-4">
+                          <label className="block text-sm font-semibold text-pink-800 mb-2">Description</label>
+                          <textarea
+                            value={hk.description}
+                            onChange={(e) => handleArrayChange('hackathons', index, 'description', e.target.value)}
+                            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-pink-500 focus:border-pink-500 text-gray-900"
+                            rows={3}
+                            placeholder="Project summary, stack, outcome, team size, etc."
                           />
                         </div>
                       </div>

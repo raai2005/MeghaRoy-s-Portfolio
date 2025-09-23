@@ -44,21 +44,23 @@ npm install
 ```
 
 3. Set up environment variables
-   Create a `.env.local` file in the root directory:
+   Create a `.env.local` file in the root directory (see `.env.example` for a template):
 
 ```env
 # MongoDB Connection
-MONGODB_URI=mongodb://localhost:27017/portfolio
-# or use MongoDB Atlas: mongodb+srv://username:password@cluster.mongodb.net/portfolio
+# Example local: mongodb://localhost:27017
+# Example Atlas: mongodb+srv://<user>:<password>@<cluster>.mongodb.net
+MONGODB_URI=
+MONGODB_DB_NAME=MyPortfolioDB
 
 # Cloudinary Configuration
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
 
-# Next.js
-NEXTAUTH_SECRET=your_nextauth_secret_here
-NEXTAUTH_URL=http://localhost:3000
+# Optional runtime
+# NODE_ENV=development
+# PORT=3000
 ```
 
 4. Run the development server
@@ -68,6 +70,82 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the portfolio.
+
+## MongoDB credentials: from scratch (Atlas and local)
+
+You have two easy options to get MongoDB credentials:
+
+### Option A — MongoDB Atlas (free tier, recommended)
+
+1. Create an Atlas account and project
+
+- Go to https://www.mongodb.com/atlas
+- Create an account, create a new Project, then create a Free (M0) Cluster.
+
+2. Create a database user
+
+- In Atlas, go to Database Access → Add New Database User
+- Choose “Password” authentication
+- Set a username and strong password (save them! you’ll put them in the URI)
+- Database user permissions: Start with “Built-in Role: Read and write to any database” (you can later restrict to your DB)
+
+3. Allow your IP address
+
+- In Atlas, go to Network Access → Add IP Address
+- For quick local testing, you can use 0.0.0.0/0 (any IP). For production, restrict to specific IPs.
+
+4. Get your connection string (URI)
+
+- In Atlas, go to Database → Connect → Drivers → Node.js → Copy the connection string. It looks like:
+
+```
+mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/?retryWrites=true&w=majority
+```
+
+5. Fill your env
+
+- In `.env.local`:
+
+```
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/?retryWrites=true&w=majority
+MONGODB_DB_NAME=MyPortfolioDB
+```
+
+6. Verify the connection (optional)
+
+- Run the bundled test script to connect and seed a default portfolio document:
+  - PowerShell (from project root):
+    - node test-mongodb.js
+
+### Option B — Local MongoDB (no cloud)
+
+1. Install MongoDB Community Server or use Docker
+
+- Native installer: https://www.mongodb.com/try/download/community
+- Or Docker (optional):
+
+```
+docker run --name mongo -p 27017:27017 -d mongo:7
+```
+
+2. Connection string
+
+- Use this in `.env.local`:
+
+```
+MONGODB_URI=mongodb://localhost:27017
+MONGODB_DB_NAME=MyPortfolioDB
+```
+
+3. (Optional) Create the database/collection
+
+- The app will create documents on first run. You can also use MongoDB Compass or mongosh to create `MyPortfolioDB` and a `portfolio` collection.
+
+### Security tips
+
+- Never commit secrets. Use `.env.local` for local development.
+- Use least-privileged DB users in production. Restrict IP access in Atlas.
+- Rotate credentials periodically.
 
 ## Database Schema
 
