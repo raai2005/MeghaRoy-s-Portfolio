@@ -71,7 +71,7 @@ export default function Contact({ data }: ContactProps) {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto transition-colors duration-300">
-            I'm always interested in new opportunities and exciting projects. Let's connect!
+            I&apos;m always interested in new opportunities and exciting projects. Let&apos;s connect!
           </p>
         </motion.div>
 
@@ -85,7 +85,7 @@ export default function Contact({ data }: ContactProps) {
             viewport={{ once: true }}
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Let's talk</h3>
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-300">Let&apos;s talk</h3>
               <p className="text-gray-600 dark:text-gray-300 mb-8 transition-colors duration-300">
                 Feel free to reach out if you want to collaborate on a project, have a question, or just want to connect.
               </p>

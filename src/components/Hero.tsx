@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 interface HeroData {
   name?: string
@@ -59,9 +60,11 @@ export default function Hero({ data }: HeroProps) {
               whileHover={{ scale: 1.05, rotate: 5 }}
               transition={{ duration: 0.3 }}
             >
-              <img
-                src={heroData.image}
-                alt={heroData.name}
+              <Image
+                src={heroData.image || '/placeholder.jpg'}
+                alt={heroData.name || 'Profile Picture'}
+                width={192}
+                height={192}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement
@@ -75,7 +78,7 @@ export default function Hero({ data }: HeroProps) {
             className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-300"
             variants={itemVariants}
           >
-            Hi, I'm{' '}
+            Hi, I&apos;m{' '}
             <motion.span 
               className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600"
               initial={{ opacity: 0, scale: 0.5 }}

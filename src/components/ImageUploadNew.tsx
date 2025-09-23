@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface ImageUploadProps {
   currentImage?: string
@@ -66,9 +67,11 @@ export default function ImageUpload({
       {/* Current Image Preview */}
       {currentImage && (
         <div className="relative">
-          <img
+          <Image
             src={currentImage}
             alt="Current image"
+            width={300}
+            height={300}
             className="w-32 h-32 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
           />
           {/* Success Tick Mark */}

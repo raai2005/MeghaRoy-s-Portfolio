@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 
 interface ImageUploadProps {
   currentImage?: string
@@ -81,9 +82,11 @@ export default function ImageUpload({
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <img
+          <Image
             src={currentImage}
             alt="Current image"
+            width={300}
+            height={300}
             className="w-32 h-32 object-cover rounded-lg border border-gray-300 dark:border-gray-600"
           />
           {/* Success Tick Mark */}

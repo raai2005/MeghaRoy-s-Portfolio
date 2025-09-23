@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Lottie from 'lottie-react';
+import Image from 'next/image';
 
 // Basic fallback animation data if remote animation fails
 const fallbackAnimation = {
@@ -342,9 +343,11 @@ export default function About({ data }: AboutProps) {
 
               {/* Show image if available */}
               {aboutData.image && (
-                <img
+                <Image
                   src={aboutData.image}
                   alt="About Megha"
+                  width={500}
+                  height={500}
                   className="absolute inset-0 w-full h-full object-cover opacity-0"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;

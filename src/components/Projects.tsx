@@ -59,7 +59,7 @@ export default function Projects({ data }: ProjectsProps) {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto"></div>
           <p className="text-lg text-gray-600 dark:text-gray-300 mt-4 max-w-2xl mx-auto transition-colors duration-300">
-            Here are some of the projects I've worked on recently.
+            Here are some of the projects I&apos;ve worked on recently.
           </p>
         </motion.div>
 
