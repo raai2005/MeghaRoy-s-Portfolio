@@ -1,7 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ReactNode } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
+import { useAnimation } from '@/components/AnimationContext'
 
 interface BentoGridProps {
   children: ReactNode
@@ -14,6 +15,7 @@ interface BentoGridItemProps {
   size?: 'small' | 'medium' | 'large' | 'wide' | 'tall' | 'hero'
   glowColor?: string
   delay?: number
+  id?: string
 }
 
 const BentoGrid = ({ children, className = '' }: BentoGridProps) => {
@@ -34,7 +36,8 @@ const BentoGridItem = ({
   className = '', 
   size = 'medium',
   glowColor = 'rgba(59, 130, 246, 0.3)',
-  delay = 0 
+  delay = 0,
+  id
 }: BentoGridItemProps) => {
   
   const sizeClasses = {
@@ -45,11 +48,30 @@ const BentoGridItem = ({
     tall: 'w-full',
     hero: 'w-full'
   }
+  
+  // Get animation keys from context
+  const { animationKeys } = useAnimation();
+  
+  // Local state for animation control
+  const [isVisible, setIsVisible] = useState(false);
+  const [key, setKey] = useState(0);
+  
+  // Update the key when the section's animation key changes
+  useEffect(() => {
+    if (id && id in animationKeys) {
+      setKey(animationKeys[id as keyof typeof animationKeys]);
+      setIsVisible(false);
+      // Small delay to ensure animation reset
+      setTimeout(() => setIsVisible(true), 50);
+    }
+  }, [id, animationKeys]);
 
   return (
     <motion.div
+      id={id}
+      key={`${id}-${key}`} // Key changes will force re-render and reset animation
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.95 }}
       whileHover={{ scale: 1.02, y: -5 }}
       transition={{ 
         duration: 0.6, 
@@ -58,7 +80,6 @@ const BentoGridItem = ({
         stiffness: 100,
         damping: 20
       }}
-      viewport={{ once: true, margin: "-50px" }}
       className={`
         group relative overflow-hidden rounded-xl lg:rounded-2xl
         ${sizeClasses[size]}

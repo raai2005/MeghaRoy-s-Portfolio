@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
+import { AnimationProvider } from '@/components/AnimationContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,9 +35,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider>
-          <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
-            {children}
-          </main>
+          <AnimationProvider>
+            <main className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 transition-colors duration-300">
+              {children}
+            </main>
+          </AnimationProvider>
         </ThemeProvider>
       </body>
     </html>

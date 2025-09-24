@@ -3,12 +3,17 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
+import { useAnimation } from './AnimationContext';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { resetAnimation } = useAnimation();
 
   const scrollToSection = (sectionId: string) => {
+    // Reset the animation for the section
+    resetAnimation(sectionId as any);
+    
     // For Bento Grid layout, we'll scroll to the main page sections
     if (sectionId === 'hero') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -16,7 +21,16 @@ export default function Header() {
       // Try to find the element, if not found, scroll to approximate positions
       const element = document.getElementById(sectionId);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+        // Get the position of the element and subtract header height for better positioning
+        const headerOffset = 80; // Adjust this value based on your header height + some padding
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+        const offsetPosition = elementPosition - headerOffset;
+        
+        // Scroll to the adjusted position
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
       } else {
         // Fallback scroll positions for Bento Grid layout
         const positions = {
@@ -69,7 +83,7 @@ export default function Header() {
               initial={{ x: 50, opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="ml-10 flex items-baseline space-x-4"
+              className="ml-10 flex items-center justify-center space-x-6"
             >
               {menuItems.map((item, index) => (
                 <motion.button
@@ -80,7 +94,7 @@ export default function Header() {
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => scrollToSection(item.id)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium"
+                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium relative"
                 >
                   {item.name}
                 </motion.button>
@@ -94,7 +108,7 @@ export default function Header() {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 onClick={toggleTheme}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 p-2 rounded-md transition-colors"
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 p-2 rounded-md transition-colors flex items-center justify-center"
                 aria-label="Toggle theme"
               >
                 <motion.div

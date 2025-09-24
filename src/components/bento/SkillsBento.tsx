@@ -112,7 +112,14 @@ export default function SkillsBento({ data }: SkillsBentoProps) {
             boxShadow: "0 5px 15px rgba(59, 130, 246, 0.3)" 
           }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const skillsSection = document.getElementById('skills');
+            if (skillsSection) {
+              skillsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.8 }}

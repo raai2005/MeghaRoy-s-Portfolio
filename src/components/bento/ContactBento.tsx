@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
@@ -6,7 +6,8 @@ import { useState } from 'react'
 interface ContactData {
   email?: string
   phone?: string
-  location?: string
+  github?: string
+  linkedin?: string
 }
 
 interface ContactBentoProps {
@@ -19,7 +20,8 @@ export default function ContactBento({ data }: ContactBentoProps) {
   const contactData = data || {
     email: 'megha@example.com',
     phone: '+1 (555) 123-4567',
-    location: 'New York, USA'
+    github: 'megha',
+    linkedin: 'megha'
   }
 
   const contactItems = [
@@ -38,18 +40,25 @@ export default function ContactBento({ data }: ContactBentoProps) {
       gradient: 'from-green-400 to-emerald-400'
     },
     {
-      label: 'Location',
-      value: contactData.location,
-      icon: '📍',
-      href: '#',
-      gradient: 'from-blue-400 to-cyan-400'
+      label: 'GitHub',
+      value: `@${contactData.github}`,
+      icon: '💻',
+      href: `https://github.com/${contactData.github}`,
+      gradient: 'from-blue-400 to-purple-400'
+    },
+    {
+      label: 'LinkedIn',
+      value: `@${contactData.linkedin}`,
+      icon: '💼',
+      href: `https://linkedin.com/in/${contactData.linkedin}`,
+      gradient: 'from-cyan-400 to-blue-500'
     }
   ]
 
   return (
     <div className="h-full min-h-[350px] p-6 lg:p-8">
       <motion.div
-        className="h-full flex flex-col justify-center max-w-3xl mx-auto"
+        className="h-full flex flex-col justify-center max-w-4xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -57,7 +66,7 @@ export default function ContactBento({ data }: ContactBentoProps) {
       >
         {/* Title */}
         <motion.h2 
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-6 text-center"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-8 text-center"
           whileHover={{ 
             scale: 1.02,
             textShadow: "0 0 20px rgba(245, 101, 101, 0.8)"
@@ -68,45 +77,50 @@ export default function ContactBento({ data }: ContactBentoProps) {
           </span>
         </motion.h2>
 
-        {/* Contact Items */}
-        <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto w-full">
-          {contactItems.map((item, index) => (
-            <motion.div
-              key={item.label}
-              className="relative"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ 
-                duration: 0.6, 
-                delay: index * 0.1,
-                ease: [0.6, -0.05, 0.01, 0.99] as const
-              }}
-              viewport={{ once: true }}
-              onHoverStart={() => setHoveredItem(item.label)}
-              onHoverEnd={() => setHoveredItem(null)}
-            >
-              <motion.a
-                href={item.href}
-                className={`block p-4 rounded-lg transition-all duration-300 ${
-                  item.href === '#' ? 'cursor-default' : 'cursor-pointer'
-                }`}
-                style={{
-                  background: hoveredItem === item.label 
-                    ? `linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)`
-                    : `linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)`,
-                  backdropFilter: 'blur(10px)',
-                  WebkitBackdropFilter: 'blur(10px)',
-                  border: hoveredItem === item.label 
-                    ? '1px solid rgba(255, 255, 255, 0.2)' 
-                    : '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-                whileHover={{ scale: 1.02, x: 5 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <div className="flex items-center gap-3">
+        {/* Two Column Layout */}
+        <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+          {/* Left Column - Contact Info */}
+          <motion.div 
+            className="flex-1"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="space-y-4">
+              {/* Stack of Contact Items */}
+              {contactItems.map((item, index) => (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  className={`flex items-center gap-3 p-4 rounded-lg ${
+                    item.href === '#' ? 'cursor-default' : 'cursor-pointer'
+                  }`}
+                  style={{
+                    background: `linear-gradient(135deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.03) 100%)`,
+                    backdropFilter: 'blur(10px)',
+                    WebkitBackdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255, 255, 255, 0.1)'
+                  }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: [0.6, -0.05, 0.01, 0.99]
+                  }}
+                  viewport={{ once: true }}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    x: 5,
+                    boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
+                    borderColor: "rgba(255, 255, 255, 0.2)"
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   {/* Icon */}
                   <motion.div
-                    className="text-2xl"
+                    className="text-2xl flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gray-800/50"
                     whileHover={{ scale: 1.2, rotate: 10 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -115,18 +129,12 @@ export default function ContactBento({ data }: ContactBentoProps) {
                   
                   {/* Content */}
                   <div className="flex-1">
-                    <motion.p 
-                      className="text-sm text-gray-400 mb-1"
-                      whileHover={{ color: '#ffffff' }}
-                    >
+                    <p className="text-sm text-gray-400 mb-1">
                       {item.label}
-                    </motion.p>
-                    <motion.p 
-                      className={`font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}
-                      whileHover={{ scale: 1.05 }}
-                    >
+                    </p>
+                    <p className={`font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>
                       {item.value}
-                    </motion.p>
+                    </p>
                   </div>
 
                   {/* Arrow indicator for clickable items */}
@@ -140,59 +148,120 @@ export default function ContactBento({ data }: ContactBentoProps) {
                       →
                     </motion.div>
                   )}
-                </div>
-              </motion.a>
-            </motion.div>
-          ))}
-        </div>
+                </motion.a>
+              ))}
+            </div>
 
-        {/* CTA Button */}
-        <motion.div
-          className="pt-4"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <motion.button
-            className="w-full px-4 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-semibold rounded-lg"
-            whileHover={{ 
-              scale: 1.02,
-              boxShadow: "0 8px 25px rgba(245, 101, 101, 0.4)"
-            }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => window.location.href = `mailto:${contactData.email}`}
+            {/* Additional space for better layout */}
+            <div className="pb-4"></div>
+          </motion.div>
+
+          {/* Right Column - Message Form */}
+          <motion.div
+            className="flex-1 bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-md rounded-xl border border-gray-700/30 p-5 shadow-xl"
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
           >
-            Send Message
-          </motion.button>
-        </motion.div>
+            <div className="h-full flex flex-col">
+              <h3 className="text-xl font-semibold text-gray-100 mb-4">Send Message</h3>
+              
+              {/* Enhanced Form */}
+              <div className="flex-1 flex flex-col justify-center">
+                {/* Form Fields */}
+                <div className="space-y-4">
+                  {/* Name Input */}
+                  <div className="relative">
+                    <motion.input 
+                      type="text" 
+                      placeholder="Your Name"
+                      className="w-full bg-gray-800/40 rounded-md px-4 py-3 border border-gray-700/50 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+                      whileFocus={{ scale: 1.01 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3 }}
+                      viewport={{ once: true }}
+                    />
+                    <motion.div 
+                      className="absolute top-3 right-4 text-gray-400 opacity-50"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      👤
+                    </motion.div>
+                  </div>
+                  
+                  {/* Email Input */}
+                  <div className="relative">
+                    <motion.input 
+                      type="email" 
+                      placeholder="Your Email"
+                      className="w-full bg-gray-800/40 rounded-md px-4 py-3 border border-gray-700/50 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+                      whileFocus={{ scale: 1.01 }}
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 }}
+                      viewport={{ once: true }}
+                    />
+                    <motion.div 
+                      className="absolute top-3 right-4 text-gray-400 opacity-50"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      ✉️
+                    </motion.div>
+                  </div>
+                  
+                  {/* Message Textarea */}
+                  <motion.textarea
+                    placeholder="Your Message"
+                    rows={2}
+                    className="w-full bg-gray-800/40 rounded-md px-4 py-3 border border-gray-700/50 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all resize-none"
+                    whileFocus={{ scale: 1.01 }}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.2 }}
+                    viewport={{ once: true }}
+                  />
 
-        {/* Social Links */}
-        <motion.div
-          className="flex justify-center gap-4 pt-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          viewport={{ once: true }}
-        >
-          {['💼', '🐦', '💻', '📸'].map((icon, index) => (
-            <motion.button
-              key={index}
-              className="w-10 h-10 rounded-full bg-gray-800/50 backdrop-blur-sm border border-gray-700 flex items-center justify-center text-lg hover:bg-gray-700/50 transition-colors"
-              whileHover={{ 
-                scale: 1.1, 
-                y: -2,
-                boxShadow: "0 5px 15px rgba(255, 255, 255, 0.2)"
-              }}
-              whileTap={{ scale: 0.9 }}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 + index * 0.1 }}
-            >
-              {icon}
-            </motion.button>
-          ))}
-        </motion.div>
+                  {/* Message Guidelines */}
+                  <motion.p 
+                    className="text-xs text-gray-400 italic"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 0.7 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    viewport={{ once: true }}
+                  >
+                  </motion.p>
+                </div>
+                
+                {/* Send Button */}
+                <motion.button
+                  className="w-full mt-4 px-4 py-3 bg-gradient-to-r from-red-500 to-pink-500 text-white font-semibold rounded-lg shadow-lg flex items-center justify-center gap-2 transition-all"
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: "0 8px 25px rgba(245, 101, 101, 0.4)"
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(`mailto:${contactData.email}`, '_blank');
+                  }}
+                >
+                  <span>Send Message</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.6666 1.33337L7.33329 8.66671" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M14.6666 1.33337L9.99996 14.6667L7.33329 8.66671L1.33329 6.00004L14.6666 1.33337Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
     </div>
   )

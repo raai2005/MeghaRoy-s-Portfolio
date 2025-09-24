@@ -182,7 +182,14 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
             boxShadow: "0 5px 15px rgba(168, 85, 247, 0.3)" 
           }}
           whileTap={{ scale: 0.95 }}
-          onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            const projectsSection = document.getElementById('projects');
+            if (projectsSection) {
+              projectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ delay: 1 }}
