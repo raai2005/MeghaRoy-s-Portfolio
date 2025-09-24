@@ -2,12 +2,22 @@
 
 import { useState, useEffect } from 'react'
 import Header from '@/components/Header'
-import Hero from '@/components/HeroNew'
+import Hero from '@/components/Hero'
 import About from '@/components/About'
 import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
+import GlobalBackground from '@/components/backgrounds/GlobalBackground'
+import ClickEffect from '@/components/backgrounds/ClickEffect'
+import { BentoGrid, BentoGridItem } from '@/components/ui/BentoGrid'
+
+// Import refactored components for Bento Grid
+import HeroBento from '@/components/bento/HeroBento'
+import AboutBento from '@/components/bento/AboutBento'
+import SkillsBento from '@/components/bento/SkillsBento'
+import ProjectsBento from '@/components/bento/ProjectsBento'
+import ContactBento from '@/components/bento/ContactBento'
 
 interface PortfolioData {
   hero?: {
@@ -79,14 +89,44 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen">
-      <Header />
-      <Hero data={portfolioData.hero} />
-      <About data={portfolioData.about} />
-      <Skills data={portfolioData.skills} />
-      <Projects data={portfolioData.projects} />
-      <Contact data={portfolioData.contact} />
-      <Footer />
-    </div>
+    <ClickEffect>
+      <GlobalBackground>
+        <div className="min-h-screen">
+          <Header />
+          
+          {/* Bento Grid Layout */}
+          <div className="pt-20 pb-4 lg:pt-24 lg:pb-6">
+            <BentoGrid>
+              {/* Hero Section - Full width hero */}
+              <BentoGridItem size="hero" glowColor="rgba(99, 102, 241, 0.4)" delay={0.1}>
+                <HeroBento data={portfolioData.hero} />
+              </BentoGridItem>
+              
+              {/* About Section */}
+              <BentoGridItem size="wide" glowColor="rgba(16, 185, 129, 0.4)" delay={0.2}>
+                <AboutBento data={portfolioData.about} />
+              </BentoGridItem>
+              
+              {/* Skills Section */}
+              <BentoGridItem size="wide" glowColor="rgba(59, 130, 246, 0.4)" delay={0.3}>
+                <SkillsBento data={portfolioData.skills} />
+              </BentoGridItem>
+              
+              {/* Projects Section */}
+              <BentoGridItem size="wide" glowColor="rgba(168, 85, 247, 0.4)" delay={0.4}>
+                <ProjectsBento data={portfolioData.projects} />
+              </BentoGridItem>
+              
+              {/* Contact Section */}
+              <BentoGridItem size="wide" glowColor="rgba(245, 101, 101, 0.4)" delay={0.5}>
+                <ContactBento data={portfolioData.contact} />
+              </BentoGridItem>
+            </BentoGrid>
+          </div>
+          
+          <Footer />
+        </div>
+      </GlobalBackground>
+    </ClickEffect>
   )
 }

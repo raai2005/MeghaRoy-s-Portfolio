@@ -1,9 +1,15 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#2563eb',
+}
 
 export const metadata: Metadata = {
   title: 'Megha Portfolio - Full Stack Developer',
@@ -17,8 +23,6 @@ export const metadata: Metadata = {
     apple: 'https://res.cloudinary.com/dcz3olflf/image/upload/v1/portfolio/apple-icon.png',
   },
   manifest: '/manifest.json',
-  themeColor: '#2563eb',
-  viewport: 'width=device-width, initial-scale=1',
 }
 
 export default function RootLayout({
