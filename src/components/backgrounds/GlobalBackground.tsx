@@ -29,9 +29,9 @@ export default function GlobalBackground({ children }: GlobalBackgroundProps) {
               width: `${200 + i * 100}px`,
               height: `${200 + i * 100}px`,
               background: `radial-gradient(circle, ${
-                i === 0 ? 'rgb(239, 68, 68)' : 
-                i === 1 ? 'rgb(0, 0, 0)' : 
-                'rgb(185, 28, 28)'
+                i === 0 ? 'rgb(59, 130, 246)' : 
+                i === 1 ? 'rgb(168, 85, 247)' : 
+                'rgb(16, 185, 129)'
               }, transparent)`,
               left: `${20 + i * 30}%`,
               top: `${10 + i * 20}%`,
@@ -54,8 +54,8 @@ export default function GlobalBackground({ children }: GlobalBackgroundProps) {
           className="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]"
           style={{
             backgroundImage: `
-              linear-gradient(to right, rgb(185, 28, 28) 1px, transparent 1px),
-              linear-gradient(to bottom, rgb(185, 28, 28) 1px, transparent 1px)
+              linear-gradient(to right, rgb(99, 102, 241) 1px, transparent 1px),
+              linear-gradient(to bottom, rgb(99, 102, 241) 1px, transparent 1px)
             `,
             backgroundSize: '50px 50px',
             transform: `translateY(${scrollY * 0.1}px)`,
@@ -63,8 +63,8 @@ export default function GlobalBackground({ children }: GlobalBackgroundProps) {
         />
 
         {/* Gradient overlays */}
-        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-red-950/50 to-transparent dark:from-red-950/30 dark:to-transparent" />
-        <div className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-black/50 to-transparent dark:from-black/30 dark:to-transparent" />
+        <div className="absolute top-0 left-0 w-full h-96 bg-gradient-to-b from-blue-50/80 to-transparent dark:from-blue-950/30 dark:to-transparent" />
+        <div className="absolute bottom-0 left-0 w-full h-96 bg-gradient-to-t from-gray-100/80 to-transparent dark:from-black/30 dark:to-transparent" />
       </div>
 
       {/* Content */}

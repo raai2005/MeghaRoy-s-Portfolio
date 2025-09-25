@@ -56,13 +56,13 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
       >
         {/* Title */}
         <motion.h2 
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-6 text-center"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white mb-6 text-center"
           whileHover={{ 
             scale: 1.02,
             textShadow: "0 0 20px rgba(168, 85, 247, 0.8)"
           }}
         >
-          <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
             Featured Projects
           </span>
         </motion.h2>
@@ -86,14 +86,14 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
                 {/* Project Info */}
                 <div>
                   <motion.h3 
-                    className="text-lg lg:text-xl font-bold text-white mb-2"
+                    className="text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-2"
                     whileHover={{ scale: 1.02 }}
                   >
                     {project.title}
                   </motion.h3>
                   
                   <motion.p 
-                    className="text-gray-300 text-sm lg:text-base mb-4 leading-relaxed"
+                    className="text-gray-600 dark:text-gray-300 text-sm lg:text-base mb-4 leading-relaxed"
                     whileHover={{ scale: 1.01 }}
                   >
                     {project.description}
@@ -104,7 +104,7 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
                     {project.technologies.slice(0, 3).map((tech, techIndex) => (
                       <motion.span
                         key={tech}
-                        className="px-2 py-1 text-xs bg-purple-500/20 border border-purple-400/30 rounded text-purple-300"
+                        className="px-2 py-1 text-xs bg-purple-500/20 dark:bg-purple-500/20 border border-purple-500/50 dark:border-purple-400/30 rounded text-purple-700 dark:text-purple-300"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ delay: techIndex * 0.1 + 0.3 }}
@@ -140,7 +140,7 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 px-3 py-2 text-sm border border-gray-400/30 text-gray-300 rounded-lg hover:border-white hover:text-white transition-colors"
+                      className="flex items-center gap-1 px-3 py-2 text-sm border border-gray-400/50 dark:border-gray-400/30 text-gray-700 dark:text-gray-300 rounded-lg hover:border-gray-600 dark:hover:border-white hover:text-gray-900 dark:hover:text-white transition-colors"
                       whileHover={{ 
                         scale: 1.05,
                         boxShadow: "0 5px 15px rgba(255, 255, 255, 0.2)"
@@ -164,8 +164,8 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
               key={index}
               className={`w-2 h-2 rounded-full transition-colors duration-300 ${
                 index === currentProject 
-                  ? 'bg-purple-400' 
-                  : 'bg-gray-600 hover:bg-gray-500'
+                  ? 'bg-purple-500 dark:bg-purple-400' 
+                  : 'bg-gray-400 dark:bg-gray-600 hover:bg-gray-500 dark:hover:bg-gray-500'
               }`}
               onClick={() => setCurrentProject(index)}
               whileHover={{ scale: 1.2 }}
@@ -176,7 +176,7 @@ export default function ProjectsBento({ data }: ProjectsBentoProps) {
 
         {/* View All Projects Button */}
         <motion.button
-          className="mt-4 px-4 py-2 text-sm text-purple-400 border border-purple-400/30 rounded-full hover:bg-purple-400/10 transition-colors duration-300"
+          className="mt-4 px-4 py-2 text-sm text-purple-600 dark:text-purple-400 border border-purple-500/50 dark:border-purple-400/30 rounded-full hover:bg-purple-500/10 dark:hover:bg-purple-400/10 transition-colors duration-300"
           whileHover={{ 
             scale: 1.05,
             boxShadow: "0 5px 15px rgba(168, 85, 247, 0.3)" 

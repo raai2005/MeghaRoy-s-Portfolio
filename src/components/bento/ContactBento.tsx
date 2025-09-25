@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
@@ -66,13 +66,13 @@ export default function ContactBento({ data }: ContactBentoProps) {
       >
         {/* Title */}
         <motion.h2 
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-8 text-center"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center"
           whileHover={{ 
             scale: 1.02,
             textShadow: "0 0 20px rgba(245, 101, 101, 0.8)"
           }}
         >
-          <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-red-600 to-pink-600 dark:from-red-400 dark:to-pink-400 bg-clip-text text-transparent">
             Get In Touch
           </span>
         </motion.h2>
@@ -129,7 +129,7 @@ export default function ContactBento({ data }: ContactBentoProps) {
                   
                   {/* Content */}
                   <div className="flex-1">
-                    <p className="text-sm text-gray-400 mb-1">
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mb-1">
                       {item.label}
                     </p>
                     <p className={`font-medium bg-gradient-to-r ${item.gradient} bg-clip-text text-transparent`}>
@@ -140,7 +140,7 @@ export default function ContactBento({ data }: ContactBentoProps) {
                   {/* Arrow indicator for clickable items */}
                   {item.href !== '#' && (
                     <motion.div
-                      className="text-gray-400"
+                      className="text-gray-500 dark:text-gray-400"
                       initial={{ x: 0 }}
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
@@ -158,14 +158,14 @@ export default function ContactBento({ data }: ContactBentoProps) {
 
           {/* Right Column - Message Form */}
           <motion.div
-            className="flex-1 bg-gradient-to-br from-gray-800/30 to-gray-900/30 backdrop-blur-md rounded-xl border border-gray-700/30 p-5 shadow-xl"
+            className="flex-1 bg-gradient-to-br from-gray-100/80 to-gray-200/80 dark:from-gray-800/30 dark:to-gray-900/30 backdrop-blur-md rounded-xl border border-gray-300/50 dark:border-gray-700/30 p-5 shadow-xl self-start"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
             <div className="h-full flex flex-col">
-              <h3 className="text-xl font-semibold text-gray-100 mb-4">Send Message</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-4">Send Message</h3>
               
               {/* Enhanced Form */}
               <div className="flex-1 flex flex-col justify-center">
@@ -176,7 +176,7 @@ export default function ContactBento({ data }: ContactBentoProps) {
                     <motion.input 
                       type="text" 
                       placeholder="Your Name"
-                      className="w-full bg-gray-800/40 rounded-md px-4 py-3 border border-gray-700/50 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+                      className="w-full bg-white/80 dark:bg-gray-800/40 rounded-md px-4 py-3 border border-gray-300/50 dark:border-gray-700/50 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
                       whileFocus={{ scale: 1.01 }}
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -196,7 +196,7 @@ export default function ContactBento({ data }: ContactBentoProps) {
                     <motion.input 
                       type="email" 
                       placeholder="Your Email"
-                      className="w-full bg-gray-800/40 rounded-md px-4 py-3 border border-gray-700/50 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
+                      className="w-full bg-white/80 dark:bg-gray-800/40 rounded-md px-4 py-3 border border-gray-300/50 dark:border-gray-700/50 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all"
                       whileFocus={{ scale: 1.01 }}
                       initial={{ opacity: 0, y: 10 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -215,7 +215,7 @@ export default function ContactBento({ data }: ContactBentoProps) {
                   <motion.textarea
                     placeholder="Your Message"
                     rows={2}
-                    className="w-full bg-gray-800/40 rounded-md px-4 py-3 border border-gray-700/50 text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all resize-none"
+                    className="w-full bg-white/80 dark:bg-gray-800/40 rounded-md px-4 py-3 border border-gray-300/50 dark:border-gray-700/50 text-gray-900 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-red-500/50 focus:border-transparent transition-all resize-none"
                     whileFocus={{ scale: 1.01 }}
                     initial={{ opacity: 0, y: 10 }}
                     whileInView={{ opacity: 1, y: 0 }}

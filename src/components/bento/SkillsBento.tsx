@@ -36,13 +36,13 @@ export default function SkillsBento({ data }: SkillsBentoProps) {
       >
         {/* Title */}
         <motion.h2 
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-6 text-center"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white mb-6 text-center"
           whileHover={{ 
             scale: 1.02,
             textShadow: "0 0 20px rgba(59, 130, 246, 0.8)"
           }}
         >
-          <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
             Skills
           </span>
         </motion.h2>
@@ -65,19 +65,19 @@ export default function SkillsBento({ data }: SkillsBentoProps) {
             >
               {/* Skill Name */}
               <div className="flex justify-between items-center mb-2">
-                <span className="text-white font-medium text-sm lg:text-base">
+                <span className="text-gray-900 dark:text-white font-medium text-sm lg:text-base">
                   {skill.name}
                 </span>
-                <span className="text-blue-400 text-sm font-semibold">
+                <span className="text-blue-600 dark:text-blue-400 text-sm font-semibold">
                   {skill.level}%
                 </span>
               </div>
               
               {/* Progress Bar Background */}
-              <div className="w-full h-2 bg-gray-800/50 rounded-full overflow-hidden backdrop-blur-sm">
+              <div className="w-full h-2 bg-gray-200 dark:bg-gray-800/50 rounded-full overflow-hidden backdrop-blur-sm">
                 {/* Progress Bar Fill */}
                 <motion.div
-                  className="h-full bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full relative"
+                  className="h-full bg-gradient-to-r from-blue-500 to-cyan-500 dark:from-blue-400 dark:to-cyan-400 rounded-full relative"
                   initial={{ width: 0 }}
                   whileInView={{ width: `${skill.level}%` }}
                   transition={{ 
@@ -106,7 +106,7 @@ export default function SkillsBento({ data }: SkillsBentoProps) {
 
         {/* View All Skills Button */}
         <motion.button
-          className="mt-4 px-4 py-2 text-sm text-blue-400 border border-blue-400/30 rounded-full hover:bg-blue-400/10 transition-colors duration-300"
+          className="mt-4 px-4 py-2 text-sm text-blue-600 dark:text-blue-400 border border-blue-500/50 dark:border-blue-400/30 rounded-full hover:bg-blue-500/10 dark:hover:bg-blue-400/10 transition-colors duration-300"
           whileHover={{ 
             scale: 1.05,
             boxShadow: "0 5px 15px rgba(59, 130, 246, 0.3)" 

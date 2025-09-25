@@ -32,20 +32,20 @@ export default function AboutBento({ data }: AboutBentoProps) {
       >
         {/* Title */}
         <motion.h2 
-          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-white mb-4 text-center"
+          className="text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white mb-4 text-center"
           whileHover={{ 
             scale: 1.02,
             textShadow: "0 0 20px rgba(16, 185, 129, 0.8)"
           }}
         >
-          <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-green-600 to-emerald-600 dark:from-green-400 dark:to-emerald-400 bg-clip-text text-transparent">
             {aboutData.title || 'About Me'}
           </span>
         </motion.h2>
 
         {/* Description */}
         <motion.p 
-          className="text-lg text-gray-300 leading-relaxed flex-grow text-center max-w-3xl mx-auto"
+          className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed flex-grow text-center max-w-3xl mx-auto"
           whileHover={{ scale: 1.01 }}
           transition={{ duration: 0.2 }}
         >
@@ -73,8 +73,8 @@ export default function AboutBento({ data }: AboutBentoProps) {
               >
                 3+
               </motion.div>
-              <h3 className="text-sm lg:text-base font-semibold text-white mb-1">Years</h3>
-              <p className="text-xs lg:text-sm text-gray-300">Experience</p>
+              <h3 className="text-sm lg:text-base font-semibold text-gray-900 dark:text-white mb-1">Years</h3>
+              <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-300">Experience</p>
             </div>
           </GlassMorphCard>
           
@@ -91,8 +91,8 @@ export default function AboutBento({ data }: AboutBentoProps) {
               >
                 50+
               </motion.div>
-              <h3 className="text-sm lg:text-base font-semibold text-white mb-1">Projects</h3>
-              <p className="text-xs lg:text-sm text-gray-300">Completed</p>
+              <h3 className="text-sm lg:text-base font-semibold text-gray-900 dark:text-white mb-1">Projects</h3>
+              <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-300">Completed</p>
             </div>
           </GlassMorphCard>
 
@@ -109,8 +109,8 @@ export default function AboutBento({ data }: AboutBentoProps) {
               >
                 100+
               </motion.div>
-              <h3 className="text-sm lg:text-base font-semibold text-white mb-1">Clients</h3>
-              <p className="text-xs lg:text-sm text-gray-300">Happy</p>
+              <h3 className="text-sm lg:text-base font-semibold text-gray-900 dark:text-white mb-1">Clients</h3>
+              <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-300">Happy</p>
             </div>
           </GlassMorphCard>
 
@@ -127,8 +127,8 @@ export default function AboutBento({ data }: AboutBentoProps) {
               >
                 24/7
               </motion.div>
-              <h3 className="text-sm lg:text-base font-semibold text-white mb-1">Support</h3>
-              <p className="text-xs lg:text-sm text-gray-300">Available</p>
+              <h3 className="text-sm lg:text-base font-semibold text-gray-900 dark:text-white mb-1">Support</h3>
+              <p className="text-xs lg:text-sm text-gray-600 dark:text-gray-300">Available</p>
             </div>
           </GlassMorphCard>
         </motion.div>
@@ -144,7 +144,7 @@ export default function AboutBento({ data }: AboutBentoProps) {
           {['React', 'Node.js', 'TypeScript', 'MongoDB'].map((skill, index) => (
             <motion.span
               key={skill}
-              className="px-3 py-1 text-xs lg:text-sm bg-gradient-to-r from-green-400/20 to-emerald-400/20 border border-green-400/30 rounded-full text-green-300"
+              className="px-3 py-1 text-xs lg:text-sm bg-gradient-to-r from-green-400/20 to-emerald-400/20 dark:from-green-400/20 dark:to-emerald-400/20 border border-green-500/50 dark:border-green-400/30 rounded-full text-green-700 dark:text-green-300"
               whileHover={{ scale: 1.05, y: -2 }}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
